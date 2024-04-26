@@ -1,0 +1,577 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 4.10kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/rocker/r-ver:4.3.0@sha256:9c1703e265fca5a17963a1b255b3b2ead6dfc6d65c57e4af2f31bec15554da86
+#3 DONE 0.7s
+
+#4 [base-arm64 1/1] FROM docker.io/rocker/r-ver:4.3.0@sha256:9c1703e265fca5a17963a1b255b3b2ead6dfc6d65c57e4af2f31bec15554da86
+#4 DONE 0.0s
+
+#5 [stage-2  1/11] RUN apt-get update -y && apt-get install -y     libmysqlclient-dev     libcurl4-openssl-dev     libssl-dev     make     zlib1g-dev    git     libicu-dev     libfreetype6-dev     libfribidi-dev     libharfbuzz-dev     libxml2-dev     libxt6     libfontconfig1-dev     libjpeg-dev     libpng-dev     libtiff-dev     pandoc     libgit2-dev     && rm -rf /var/lib/apt/lists/* # Removes the package lists to keep the image size down.
+#5 CACHED
+
+#6 [stage-2  2/11] RUN mkdir -p /usr/lib/R/etc/
+#6 CACHED
+
+#7 [stage-2  3/11] RUN echo "options(renv.config.pak.enabled = TRUE, repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = parallel::detectCores())" | tee /usr/local/lib/R/etc/Rprofile.site | tee /usr/lib/R/etc/Rprofile.site
+#7 CACHED
+
+#8 [internal] load build context
+#8 transferring context: 50.44kB 0.0s done
+#8 DONE 0.0s
+
+#9 [stage-2  4/11] RUN mkdir ./testRenvDocker
+#9 DONE 0.2s
+
+#10 [stage-2  5/11] WORKDIR ./testRenvDocker
+#10 DONE 0.0s
+
+#11 [stage-2  6/11] COPY renv.lock renv.lock
+#11 DONE 0.0s
+
+#12 [stage-2  7/11] COPY .Rbuildignore .Rbuildignore
+#12 DONE 0.0s
+
+#13 [stage-2  8/11] COPY renv renv
+#13 DONE 0.0s
+
+#14 [stage-2  9/11] RUN R --quiet -e "install.packages('renv')"
+#14 0.366 > install.packages('renv')
+#14 0.368 Installing package into ‘/usr/local/lib/R/site-library’
+#14 0.368 (as ‘lib’ is unspecified)
+#14 1.319 trying URL 'https://cran.rstudio.com/src/contrib/renv_1.0.7.tar.gz'
+#14 1.465 Content type 'application/x-gzip' length 1172218 bytes (1.1 MB)
+#14 1.471 ==================================================
+#14 1.853 downloaded 1.1 MB
+#14 1.853 
+#14 2.176 * installing *source* package ‘renv’ ...
+#14 2.188 ** package ‘renv’ successfully unpacked and MD5 sums checked
+#14 2.188 ** using staged installation
+#14 2.199 ** R
+#14 2.248 ** inst
+#14 2.251 ** byte-compile and prepare package for lazy loading
+#14 6.009 ** help
+#14 6.084 *** installing help indices
+#14 6.140 *** copying figures
+#14 6.140 ** building package indices
+#14 6.306 ** installing vignettes
+#14 6.309 ** testing if installed package can be loaded from temporary location
+#14 6.510 ** testing if installed package can be loaded from final location
+#14 6.822 ** testing if installed package keeps a record of temporary installation path
+#14 6.827 * DONE (renv)
+#14 6.838 > 
+#14 6.838 > 
+#14 6.838 
+#14 6.838 The downloaded source packages are in
+#14 6.838 	‘/tmp/RtmpwzhYSE/downloaded_packages’
+#14 DONE 6.9s
+
+#15 [stage-2 10/11] RUN R --quiet -e "install.packages('remotes')"
+#15 0.401 > install.packages('remotes')
+#15 0.403 Installing package into ‘/usr/local/lib/R/site-library’
+#15 0.403 (as ‘lib’ is unspecified)
+#15 1.176 trying URL 'https://cran.rstudio.com/src/contrib/remotes_2.5.0.tar.gz'
+#15 1.324 Content type 'application/x-gzip' length 164496 bytes (160 KB)
+#15 1.324 ==================================================
+#15 1.380 downloaded 160 KB
+#15 1.380 
+#15 1.542 * installing *source* package ‘remotes’ ...
+#15 1.545 ** package ‘remotes’ successfully unpacked and MD5 sums checked
+#15 1.546 ** using staged installation
+#15 1.554 ** R
+#15 1.566 ** inst
+#15 1.566 ** byte-compile and prepare package for lazy loading
+#15 2.474 ** help
+#15 2.519 *** installing help indices
+#15 2.543 ** building package indices
+#15 2.690 ** installing vignettes
+#15 2.693 ** testing if installed package can be loaded from temporary location
+#15 2.830 ** testing if installed package can be loaded from final location
+#15 2.992 ** testing if installed package keeps a record of temporary installation path
+#15 2.994 * DONE (remotes)
+#15 2.999 
+#15 2.999 The downloaded source packages are in
+#15 2.999 	‘/tmp/RtmpD1rQT8/downloaded_packages’
+#15 3.000 > 
+#15 3.000 > 
+#15 DONE 3.0s
+
+#16 [stage-2 11/11] RUN R --quiet -e "renv::diagnostics();renv::restore(library = '/usr/local/lib/R/site-library')"
+#16 0.361 > renv::diagnostics();renv::restore(library = '/usr/local/lib/R/site-library')
+#16 0.418 Diagnostics Report [renv 1.0.7]
+#16 0.418 ===============================
+#16 0.418 
+#16 0.418 # Session Info ---------------------------------------------------------------
+#16 0.421 R version 4.3.0 (2023-04-21)
+#16 0.421 Platform: aarch64-unknown-linux-gnu (64-bit)
+#16 0.421 Running under: Ubuntu 22.04.2 LTS
+#16 0.421 
+#16 0.421 Matrix products: default
+#16 0.421 BLAS:   /usr/lib/aarch64-linux-gnu/openblas-pthread/libblas.so.3 
+#16 0.421 LAPACK: /usr/lib/aarch64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0
+#16 0.421 
+#16 0.421 locale:
+#16 0.421  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#16 0.421  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#16 0.421  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#16 0.421  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#16 0.421  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+#16 0.421 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+#16 0.421 
+#16 0.421 time zone: Etc/UTC
+#16 0.421 tzcode source: system (glibc)
+#16 0.421 
+#16 0.421 attached base packages:
+#16 0.421 [1] stats     graphics  grDevices utils     datasets  methods   base     
+#16 0.421 
+#16 0.421 loaded via a namespace (and not attached):
+#16 0.422 [1] compiler_4.3.0 tools_4.3.0    parallel_4.3.0 renv_1.0.7    
+#16 0.422 
+#16 0.422 # Project --------------------------------------------------------------------
+#16 0.422 Project path: "/testRenvDocker"
+#16 0.422 
+#16 0.422 # Status ---------------------------------------------------------------------
+#16 0.423 There are no packages installed in the project library.
+#16 0.423 Use `renv::restore()` to install the packages defined in lockfile.
+#16 0.423 
+#16 0.423 # Packages -------------------------------------------------------------------
+#16 0.427 The project library "/usr/local/lib/R/site-library/R-4.3/aarch64-unknown-linux-gnu" does not exist.
+#16 0.532              Library Source Lockfile Source Path Dependency
+#16 0.532 KernSmooth   2.23-20   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 MASS        7.3-58.4   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 Matrix         1.5-4   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 R6              <NA>   <NA>    2.5.1   CRAN <NA>       <NA>
+#16 0.532 Rcpp            <NA>   <NA>   1.0.11   CRAN <NA>       <NA>
+#16 0.532 UU              <NA>   <NA>   1.52.0 GitHub <NA>       <NA>
+#16 0.532 askpass         <NA>   <NA>    1.2.0   CRAN <NA>       <NA>
+#16 0.532 boot        1.3-28.1   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 callr           <NA>   <NA>    3.7.6   RSPM <NA>       <NA>
+#16 0.532 class         7.3-21   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 cli             <NA>   <NA>    3.6.1   CRAN <NA>       <NA>
+#16 0.532 clipr           <NA>   <NA>    0.8.0   CRAN <NA>       <NA>
+#16 0.532 cluster        2.1.4   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 codetools     0.2-19   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 cpp11           <NA>   <NA>    0.4.7   CRAN <NA>       <NA>
+#16 0.532 crayon          <NA>   <NA>    1.5.2   CRAN <NA>       <NA>
+#16 0.532 credentials     <NA>   <NA>    2.0.1   CRAN <NA>       <NA>
+#16 0.532 curl            <NA>   <NA>    5.2.1   CRAN <NA>       <NA>
+#16 0.532 desc            <NA>   <NA>    1.4.3   CRAN <NA>       <NA>
+#16 0.532 docopt         0.7.1   RSPM     <NA>   <NA>  [1]       <NA>
+#16 0.532 dplyr           <NA>   <NA>    1.1.4   CRAN <NA>       <NA>
+#16 0.532 fansi           <NA>   <NA>    1.0.4   CRAN <NA>       <NA>
+#16 0.532 foreign       0.8-84   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.532 fs              <NA>   <NA>    1.6.3   CRAN <NA>       <NA>
+#16 0.532 generics        <NA>   <NA>    0.1.3   CRAN <NA>       <NA>
+#16 0.532 gert            <NA>   <NA>    2.0.1   CRAN <NA>       <NA>
+#16 0.532 gh              <NA>   <NA>    1.4.1   RSPM <NA>       <NA>
+#16 0.532 gitcreds        <NA>   <NA>    0.1.2   CRAN <NA>       <NA>
+#16 0.533 glue            <NA>   <NA>    1.6.2   CRAN <NA>       <NA>
+#16 0.533 httr2           <NA>   <NA>    1.0.1   RSPM <NA>       <NA>
+#16 0.533 ini             <NA>   <NA>    0.3.1   CRAN <NA>       <NA>
+#16 0.533 jsonlite        <NA>   <NA>    1.8.8   CRAN <NA>       <NA>
+#16 0.533 lattice       0.21-8   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 lifecycle       <NA>   <NA>    1.0.3   CRAN <NA>       <NA>
+#16 0.533 littler       0.3.18   RSPM     <NA>   <NA>  [1]       <NA>
+#16 0.533 lubridate       <NA>   <NA>    1.9.3   CRAN <NA>       <NA>
+#16 0.533 magrittr        <NA>   <NA>    2.0.3   CRAN <NA>       <NA>
+#16 0.533 mgcv          1.8-42   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 nlme         3.1-162   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 nnet          7.3-18   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 openssl         <NA>   <NA>    2.1.2   RSPM <NA>       <NA>
+#16 0.533 pillar          <NA>   <NA>    1.9.0   CRAN <NA>       <NA>
+#16 0.533 pkgbuild        <NA>   <NA>    1.4.4   RSPM <NA>       <NA>
+#16 0.533 pkgconfig       <NA>   <NA>    2.0.3   CRAN <NA>       <NA>
+#16 0.533 pkgload         <NA>   <NA>    1.3.4   CRAN <NA>       <NA>
+#16 0.533 plyr            <NA>   <NA>    1.8.8   CRAN <NA>       <NA>
+#16 0.533 processx        <NA>   <NA>    3.8.4   RSPM <NA>       <NA>
+#16 0.533 ps              <NA>   <NA>    1.7.6   CRAN <NA>       <NA>
+#16 0.533 purrr           <NA>   <NA>    1.0.2   CRAN <NA>       <NA>
+#16 0.533 rappdirs        <NA>   <NA>    0.3.3   CRAN <NA>       <NA>
+#16 0.533 remotes        2.5.0   CRAN     <NA>   <NA>  [1]       <NA>
+#16 0.533 renv           1.0.7   CRAN    1.0.7   CRAN  [1]     direct
+#16 0.533 rlang           <NA>   <NA>    1.1.1   CRAN <NA>       <NA>
+#16 0.533 rpart         4.1.19   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 rprojroot       <NA>   <NA>    2.0.4   CRAN <NA>       <NA>
+#16 0.533 rstudioapi      <NA>   <NA>   0.15.0   CRAN <NA>       <NA>
+#16 0.533 spatial       7.3-16   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 stringi         <NA>   <NA>   1.7.12   CRAN <NA>       <NA>
+#16 0.533 stringr         <NA>   <NA>    1.5.0   RSPM <NA>       <NA>
+#16 0.533 survival       3.5-5   CRAN     <NA>   <NA>  [2]       <NA>
+#16 0.533 sys             <NA>   <NA>    3.4.2   CRAN <NA>       <NA>
+#16 0.533 tibble          <NA>   <NA>    3.2.1   CRAN <NA>       <NA>
+#16 0.533 tidyselect      <NA>   <NA>    1.2.1   CRAN <NA>       <NA>
+#16 0.533 timechange      <NA>   <NA>    0.3.0   CRAN <NA>       <NA>
+#16 0.533 usethis         <NA>   <NA>    2.2.3   RSPM <NA>       <NA>
+#16 0.533 utf8            <NA>   <NA>    1.2.3   CRAN <NA>       <NA>
+#16 0.533 utils           <NA>   <NA>     <NA>   <NA>  [2]   indirect
+#16 0.533 vctrs           <NA>   <NA>    0.6.5   CRAN <NA>       <NA>
+#16 0.533 whisker         <NA>   <NA>    0.4.1   CRAN <NA>       <NA>
+#16 0.533 withr           <NA>   <NA>    3.0.0   CRAN <NA>       <NA>
+#16 0.533 yaml            <NA>   <NA>    2.3.8   CRAN <NA>       <NA>
+#16 0.533 zip             <NA>   <NA>    2.3.1   CRAN <NA>       <NA>
+#16 0.533 
+#16 0.533 [1]: /usr/local/lib/R/site-library
+#16 0.533 [2]: /usr/local/lib/R/library     
+#16 0.533 
+#16 0.533 # ABI ------------------------------------------------------------------------
+#16 0.663 - No ABI problems were detected in the set of installed packages.
+#16 0.663 
+#16 0.663 # User Profile ---------------------------------------------------------------
+#16 0.663 [no user profile detected]
+#16 0.663 
+#16 0.663 # Settings -------------------------------------------------------------------
+#16 0.665 List of 13
+#16 0.665  $ bioconductor.version     : NULL
+#16 0.665  $ external.libraries       : chr(0) 
+#16 0.665  $ ignored.packages         : chr(0) 
+#16 0.665  $ package.dependency.fields: chr [1:3] "Imports" "Depends" "LinkingTo"
+#16 0.666  $ ppm.enabled              : NULL
+#16 0.666  $ ppm.ignored.urls         : chr(0) 
+#16 0.666  $ r.version                : NULL
+#16 0.666  $ snapshot.type            : chr "explicit"
+#16 0.666  $ use.cache                : logi FALSE
+#16 0.666  $ vcs.ignore.cellar        : logi TRUE
+#16 0.667  $ vcs.ignore.library       : logi TRUE
+#16 0.667  $ vcs.ignore.local         : logi TRUE
+#16 0.667  $ vcs.manage.ignores       : logi TRUE
+#16 0.667 
+#16 0.668 # Options --------------------------------------------------------------------
+#16 0.668 List of 8
+#16 0.668  $ defaultPackages                     : chr [1:6] "datasets" "utils" "grDevices" "graphics" ...
+#16 0.668  $ download.file.method                : chr "libcurl"
+#16 0.668  $ download.file.extra                 : NULL
+#16 0.668  $ install.packages.compile.from.source: NULL
+#16 0.668  $ pkgType                             : chr "source"
+#16 0.668  $ repos                               : Named chr "https://cran.rstudio.com/"
+#16 0.669   ..- attr(*, "names")= chr "CRAN"
+#16 0.669  $ renv.config.pak.enabled             : logi TRUE
+#16 0.669  $ renv.verbose                        : logi TRUE
+#16 0.669 
+#16 0.670 # Environment Variables ------------------------------------------------------
+#16 0.670 HOME               = /root
+#16 0.670 LANG               = en_US.UTF-8
+#16 0.670 MAKE               = make
+#16 0.670 R_LIBS             = /usr/local/lib/R/site-library:/usr/local/lib/R/library
+#16 0.670 R_LIBS_SITE        = /usr/local/lib/R/site-library
+#16 0.670 R_LIBS_USER        = /root/R/aarch64-unknown-linux-gnu-library/4.3
+#16 0.670 RENV_PATHS_LIBRARY = /usr/local/lib/R/site-library
+#16 0.670 
+#16 0.670 # PATH -----------------------------------------------------------------------
+#16 0.670 - /usr/local/sbin
+#16 0.670 - /usr/local/bin
+#16 0.670 - /usr/sbin
+#16 0.670 - /usr/bin
+#16 0.670 - /sbin
+#16 0.670 - /bin
+#16 0.670 
+#16 0.670 # Cache ----------------------------------------------------------------------
+#16 0.670 There are a total of 0 packages installed in the renv cache.
+#16 0.671 Cache path: "~/.cache/R/renv/cache/v5/R-4.3/aarch64-unknown-linux-gnu"
+#16 0.671 
+#16 1.869 # Downloading packages -------------------------------------------------------
+#16 1.871 - Downloading pak from r-lib ...                OK [8.3 Mb in 3.3s]
+#16 5.359 Successfully downloaded 1 package in 4.2 seconds.
+#16 5.359 
+#16 5.359 The following package(s) will be installed:
+#16 5.359 - pak [0.7.2]
+#16 5.359 These packages will be installed into "/usr/local/lib/R/site-library".
+#16 5.359 
+#16 5.359 # Installing packages --------------------------------------------------------
+#16 5.459 - Installing pak ...                            OK [installed binary in 0.69s]
+#16 6.144 Successfully installed 1 package in 0.78 seconds.
+#16 6.873 ! Using bundled GitHub PAT. Please add your own PAT using `gitcreds::gitcreds_set()`.
+#16 7.405 
+#16 17.86 ✔ Updated metadata database: 3.24 MB in 8 files.
+#16 17.86 
+#16 17.86 ℹ Updating metadata database
+#16 20.22 ✔ Updating metadata database ... done
+#16 20.22 
+#16 21.21  
+#16 21.21 → Will install 52 packages.
+#16 21.22 → Will download 52 packages with unknown size.
+#16 21.22 + askpass       1.2.0  [bld][cmp][dl]
+#16 21.22 + callr         3.7.6  [bld][dl]
+#16 21.22 + cli           3.6.1  [bld][cmp][dl]
+#16 21.22 + clipr         0.8.0  [bld][dl]
+#16 21.22 + cpp11         0.4.7  [bld][dl]
+#16 21.22 + crayon        1.5.2  [bld][dl]
+#16 21.22 + credentials   2.0.1  [bld][dl] + ✔ git
+#16 21.22 + curl          5.2.1  [bld][cmp][dl] + ✔ libcurl4-openssl-dev, ✔ libssl-dev
+#16 21.22 + desc          1.4.3  [bld][dl]
+#16 21.22 + dplyr         1.1.4  [bld][cmp][dl]
+#16 21.22 + fansi         1.0.4  [bld][cmp][dl]
+#16 21.22 + fs            1.6.3  [bld][cmp][dl] + ✔ make
+#16 21.22 + generics      0.1.3  [bld][dl]
+#16 21.22 + gert          2.0.1  [bld][cmp][dl] + ✔ libgit2-dev
+#16 21.22 + gh            1.4.1  [bld][dl]
+#16 21.22 + gitcreds      0.1.2  [bld][dl] + ✔ git
+#16 21.22 + glue          1.6.2  [bld][cmp][dl]
+#16 21.22 + httr2         1.0.1  [bld][dl]
+#16 21.22 + ini           0.3.1  [bld][dl]
+#16 21.22 + jsonlite      1.8.8  [bld][cmp][dl]
+#16 21.22 + lifecycle     1.0.3  [bld][dl]
+#16 21.22 + lubridate     1.9.3  [bld][cmp][dl]
+#16 21.22 + magrittr      2.0.3  [bld][cmp][dl]
+#16 21.22 + openssl       2.1.2  [bld][cmp][dl] + ✔ libssl-dev
+#16 21.22 + pillar        1.9.0  [bld][dl]
+#16 21.22 + pkgbuild      1.4.4  [bld][dl]
+#16 21.22 + pkgconfig     2.0.3  [bld][dl]
+#16 21.22 + pkgload       1.3.4  [bld][dl]
+#16 21.22 + plyr          1.8.8  [bld][cmp][dl]
+#16 21.22 + processx      3.8.4  [bld][cmp][dl]
+#16 21.22 + ps            1.7.6  [bld][cmp][dl]
+#16 21.22 + purrr         1.0.2  [bld][cmp][dl]
+#16 21.22 + R6            2.5.1  [bld][dl]
+#16 21.22 + rappdirs      0.3.3  [bld][cmp][dl]
+#16 21.22 + Rcpp          1.0.11 [bld][cmp][dl]
+#16 21.22 + rlang         1.1.1  [bld][cmp][dl]
+#16 21.22 + rprojroot     2.0.4  [bld][dl]
+#16 21.22 + rstudioapi    0.15.0 [bld][dl]
+#16 21.22 + stringi       1.7.12 [bld][cmp][dl] + ✔ libicu-dev
+#16 21.22 + stringr       1.5.0  [bld][dl]
+#16 21.22 + sys           3.4.2  [bld][cmp][dl]
+#16 21.22 + tibble        3.2.1  [bld][cmp][dl]
+#16 21.22 + tidyselect    1.2.1  [bld][cmp][dl]
+#16 21.22 + timechange    0.3.0  [bld][cmp][dl]
+#16 21.22 + usethis       2.2.3  [bld][dl]
+#16 21.22 + utf8          1.2.3  [bld][cmp][dl]
+#16 21.22 + UU            1.52.0 [bld][cmp][dl] (GitHub: 1935fc3)
+#16 21.22 + vctrs         0.6.5  [bld][cmp][dl]
+#16 21.22 + whisker       0.4.1  [bld][dl]
+#16 21.22 + withr         3.0.0  [bld][dl]
+#16 21.22 + yaml          2.3.8  [bld][cmp][dl]
+#16 21.22 + zip           2.3.1  [bld][cmp][dl]
+#16 21.22 ✔ All system requirements are already installed.
+#16 21.22   
+#16 21.40 ℹ Getting 52 pkgs with unknown sizes
+#16 22.05 ✔ Got askpass 1.2.0 (source) (6.04 kB)
+#16 22.06 ✔ Got R6 2.5.1 (source) (64.11 kB)
+#16 22.10 ✔ Got callr 3.7.6 (source) (104.08 kB)
+#16 22.11 ✔ Got rprojroot 2.0.4 (source) (61.64 kB)
+#16 22.13 ✔ Got rappdirs 0.3.3 (source) (12.20 kB)
+#16 22.20 ✔ Got processx 3.8.4 (source) (164.50 kB)
+#16 22.23 ✔ Got ini 0.3.1 (source) (3.48 kB)
+#16 22.29 ✔ Got magrittr 2.0.3 (source) (267.20 kB)
+#16 22.62 ✔ Got lifecycle 1.0.3 (source) (107.45 kB)
+#16 22.78 ✔ Got usethis 2.2.3 (source) (369.12 kB)
+#16 22.82 ✔ Got clipr 0.8.0 (source) (21.95 kB)
+#16 22.87 ✔ Got httr2 1.0.1 (source) (213.36 kB)
+#16 22.92 ✔ Got pkgbuild 1.4.4 (source) (48.84 kB)
+#16 22.93 ✔ Got utf8 1.2.3 (source) (240.04 kB)
+#16 22.94 ✔ Got curl 5.2.1 (source) (715.69 kB)
+#16 22.98 ✔ Got sys 3.4.2 (source) (20.32 kB)
+#16 23.00 ✔ Got crayon 1.5.2 (source) (40.75 kB)
+#16 23.36 ✔ Got UU 1.52.0 (source) (174.53 kB)
+#16 23.41 ✔ Got gitcreds 0.1.2 (source) (62.81 kB)
+#16 23.42 ✔ Got rstudioapi 0.15.0 (source) (114.68 kB)
+#16 23.46 ✔ Got gert 2.0.1 (source) (123.48 kB)
+#16 23.49 ✔ Got lubridate 1.9.3 (source) (429.02 kB)
+#16 23.75 ✔ Got ps 1.7.6 (source) (130.08 kB)
+#16 23.79 ✔ Got gh 1.4.1 (source) (46.21 kB)
+#16 23.86 ✔ Got pillar 1.9.0 (source) (441.98 kB)
+#16 23.95 ✔ Got pkgload 1.3.4 (source) (76.75 kB)
+#16 24.09 ✔ Got plyr 1.8.8 (source) (402.00 kB)
+#16 24.10 ✔ Got rlang 1.1.1 (source) (759.24 kB)
+#16 24.11 ✔ Got vctrs 0.6.5 (source) (967.95 kB)
+#16 24.14 ✔ Got pkgconfig 2.0.3 (source) (6.10 kB)
+#16 24.39 ✔ Got zip 2.3.1 (source) (111.44 kB)
+#16 24.40 ✔ Got withr 3.0.0 (source) (108.37 kB)
+#16 24.41 ✔ Got timechange 0.3.0 (source) (103.72 kB)
+#16 24.75 ✔ Got generics 0.1.3 (source) (173.58 kB)
+#16 24.96 ✔ Got tibble 3.2.1 (source) (565.72 kB)
+#16 24.99 ✔ Got cli 3.6.1 (source) (565.11 kB)
+#16 25.13 ✔ Got credentials 2.0.1 (source) (283.00 kB)
+#16 25.20 ✔ Got tidyselect 1.2.1 (source) (103.28 kB)
+#16 25.40 ✔ Got cpp11 0.4.7 (source) (285.35 kB)
+#16 25.59 ✔ Got glue 1.6.2 (source) (107.66 kB)
+#16 25.84 ✔ Got purrr 1.0.2 (source) (218.46 kB)
+#16 26.08 ✔ Got openssl 2.1.2 (source) (1.21 MB)
+#16 26.18 ✔ Got yaml 2.3.8 (source) (95.02 kB)
+#16 26.24 ✔ Got desc 1.4.3 (source) (80.47 kB)
+#16 26.33 ✔ Got fansi 1.0.4 (source) (481.76 kB)
+#16 26.43 ✔ Got jsonlite 1.8.8 (source) (1.05 MB)
+#16 26.53 ✔ Got whisker 0.4.1 (source) (28.69 kB)
+#16 26.77 ✔ Got stringr 1.5.0 (source) (175.89 kB)
+#16 27.15 ✔ Got fs 1.6.3 (source) (1.19 MB)
+#16 28.06 ✔ Got dplyr 1.1.4 (source) (1.21 MB)
+#16 28.89 ✔ Got Rcpp 1.0.11 (source) (2.99 MB)
+#16 29.85 ✔ Got stringi 1.7.12 (source) (7.61 MB)
+#16 29.89 ℹ Building R6 2.5.1
+#16 30.14 ℹ Building rprojroot 2.0.4
+#16 30.21 ℹ Building ini 0.3.1
+#16 30.24 ℹ Building clipr 0.8.0
+#16 30.30 ℹ Building jsonlite 1.8.8
+#16 30.53 ℹ Building crayon 1.5.2
+#16 30.60 ℹ Building cli 3.6.1
+#16 30.94 ℹ Building fs 1.6.3
+#16 31.66 ✔ Built ini 0.3.1 (1.4s)
+#16 31.70 ℹ Building gitcreds 0.1.2
+#16 31.78 ✔ Built R6 2.5.1 (1.6s)
+#16 31.79 ℹ Building rappdirs 0.3.3
+#16 31.89 ✔ Built clipr 0.8.0 (1.6s)
+#16 31.92 ℹ Building pkgconfig 2.0.3
+#16 32.01 ✔ Built rprojroot 2.0.4 (1.8s)
+#16 32.07 ℹ Building magrittr 2.0.3
+#16 32.63 ✔ Built crayon 1.5.2 (2s)
+#16 32.64 ℹ Building fansi 1.0.4
+#16 33.04 ✔ Built pkgconfig 2.0.3 (1.1s)
+#16 33.06 ℹ Building sys 3.4.2
+#16 33.21 ✔ Built gitcreds 0.1.2 (1.4s)
+#16 33.23 ℹ Building glue 1.6.2
+#16 33.41 ✔ Built rappdirs 0.3.3 (1.5s)
+#16 33.44 ℹ Building rstudioapi 0.15.0
+#16 33.86 ✔ Built magrittr 2.0.3 (1.7s)
+#16 33.96 ℹ Building zip 2.3.1
+#16 34.53 ✔ Built sys 3.4.2 (1.4s)
+#16 34.55 ℹ Building withr 3.0.0
+#16 35.24 ✔ Built rstudioapi 0.15.0 (1.7s)
+#16 35.25 ℹ Building yaml 2.3.8
+#16 35.30 ✔ Built glue 1.6.2 (2s)
+#16 35.32 ℹ Building ps 1.7.6
+#16 36.13 ✔ Built jsonlite 1.8.8 (5.6s)
+#16 36.14 ℹ Building Rcpp 1.0.11
+#16 36.49 ✔ Built withr 3.0.0 (1.8s)
+#16 36.52 ℹ Building rlang 1.1.1
+#16 37.50 ✔ Built fansi 1.0.4 (4.7s)
+#16 37.53 ℹ Building utf8 1.2.3
+#16 40.23 ✔ Built ps 1.7.6 (4.8s)
+#16 40.24 ℹ Building curl 5.2.1
+#16 40.45 ✔ Built cli 3.6.1 (9.5s)
+#16 40.49 ℹ Building cpp11 0.4.7
+#16 40.57 ✔ Built yaml 2.3.8 (5.3s)
+#16 40.59 ℹ Building generics 0.1.3
+#16 41.39 ✔ Built utf8 1.2.3 (3.8s)
+#16 41.47 ℹ Building whisker 0.4.1
+#16 41.72 ✔ Built cpp11 0.4.7 (1.2s)
+#16 41.76 ℹ Building stringi 1.7.12
+#16 42.77 ✔ Built generics 0.1.3 (2.1s)
+#16 42.79 ✔ Built whisker 0.4.1 (1.2s)
+#16 43.87 ✔ Installed R6 2.5.1  (1s)
+#16 43.89 ✔ Built zip 2.3.1 (9.9s)
+#16 43.92 ✔ Installed rprojroot 2.0.4  (1.1s)
+#16 43.97 ✔ Installed ini 0.3.1  (81ms)
+#16 44.00 ✔ Installed clipr 0.8.0  (53ms)
+#16 44.04 ✔ Installed jsonlite 1.8.8  (53ms)
+#16 44.09 ✔ Installed crayon 1.5.2  (65ms)
+#16 44.16 ✔ Installed cli 3.6.1  (71ms)
+#16 44.17 ℹ Building desc 1.4.3
+#16 44.26 ✔ Installed gitcreds 0.1.2  (119ms)
+#16 44.34 ✔ Installed rappdirs 0.3.3  (24ms)
+#16 44.40 ✔ Installed pkgconfig 2.0.3  (29ms)
+#16 44.48 ✔ Installed magrittr 2.0.3  (60ms)
+#16 44.51 ✔ Installed fansi 1.0.4  (83ms)
+#16 44.55 ✔ Installed sys 3.4.2  (49ms)
+#16 44.55 ℹ Building askpass 1.2.0
+#16 44.66 ✔ Installed glue 1.6.2  (25ms)
+#16 44.72 ✔ Built curl 5.2.1 (4.4s)
+#16 44.76 ✔ Installed rstudioapi 0.15.0  (50ms)
+#16 44.83 ✔ Installed zip 2.3.1  (74ms)
+#16 44.89 ✔ Installed withr 3.0.0  (90ms)
+#16 44.93 ✔ Installed yaml 2.3.8  (82ms)
+#16 44.98 ✔ Installed ps 1.7.6  (57ms)
+#16 45.01 ℹ Building processx 3.8.4
+#16 45.14 ✔ Installed utf8 1.2.3  (177ms)
+#16 45.23 ✔ Installed curl 5.2.1  (61ms)
+#16 46.35 ✔ Installed cpp11 0.4.7  (1.1s)
+#16 46.35 ℹ Building timechange 0.3.0
+#16 46.42 ✔ Built askpass 1.2.0 (1.8s)
+#16 46.49 ✔ Installed askpass 1.2.0  (25ms)
+#16 46.50 ℹ Building openssl 2.1.2
+#16 46.68 ✔ Built desc 1.4.3 (2.4s)
+#16 46.73 ✔ Installed desc 1.4.3  (26ms)
+#16 46.79 ✔ Installed generics 0.1.3  (31ms)
+#16 46.89 ✔ Installed whisker 0.4.1  (26ms)
+#16 47.47 ✔ Built rlang 1.1.1 (10.7s)
+#16 47.55 ✔ Installed rlang 1.1.1  (43ms)
+#16 47.56 ℹ Building lifecycle 1.0.3
+#16 48.99 ✔ Built lifecycle 1.0.3 (1.4s)
+#16 49.08 ✔ Installed lifecycle 1.0.3  (51ms)
+#16 49.09 ℹ Building vctrs 0.6.5
+#16 49.81 ✔ Built processx 3.8.4 (4.7s)
+#16 50.86 ✔ Installed processx 3.8.4  (1s)
+#16 50.86 ℹ Building callr 3.7.6
+#16 52.73 ✔ Built openssl 2.1.2 (6.1s)
+#16 52.84 ✔ Installed openssl 2.1.2  (64ms)
+#16 52.85 ℹ Building credentials 2.0.1
+#16 53.90 ✔ Built callr 3.7.6 (3s)
+#16 53.96 ✔ Installed callr 3.7.6  (27ms)
+#16 53.97 ℹ Building pkgbuild 1.4.4
+#16 54.13 ✔ Built credentials 2.0.1 (1.2s)
+#16 54.21 ✔ Installed credentials 2.0.1  (37ms)
+#16 54.21 ℹ Building gert 2.0.1
+#16 55.74 ✔ Built pkgbuild 1.4.4 (1.7s)
+#16 55.81 ✔ Installed pkgbuild 1.4.4  (37ms)
+#16 57.69 ✔ Built gert 2.0.1 (3.4s)
+#16 57.73 ✔ Installed gert 2.0.1  (19ms)
+#16 60.23 ✔ Built fs 1.6.3 (29s)
+#16 60.29 ✔ Installed fs 1.6.3  (24ms)
+#16 60.29 ℹ Building pkgload 1.3.4
+#16 61.39 ✔ Built Rcpp 1.0.11 (24.9s)
+#16 61.55 ✔ Installed Rcpp 1.0.11  (141ms)
+#16 61.56 ℹ Building plyr 1.8.8
+#16 61.74 ✔ Built timechange 0.3.0 (15.3s)
+#16 61.81 ✔ Installed timechange 0.3.0  (42ms)
+#16 61.82 ℹ Building lubridate 1.9.3
+#16 62.02 ✔ Built pkgload 1.3.4 (1.6s)
+#16 62.08 ✔ Installed pkgload 1.3.4  (16ms)
+#16 65.78 ✔ Built vctrs 0.6.5 (16.4s)
+#16 65.90 ✔ Installed vctrs 0.6.5  (67ms)
+#16 65.90 ℹ Building tidyselect 1.2.1
+#16 65.98 ℹ Building purrr 1.0.2
+#16 66.13 ✔ Built lubridate 1.9.3 (4.2s)
+#16 66.15 ℹ Building httr2 1.0.1
+#16 66.25 ℹ Building pillar 1.9.0
+#16 66.54 ✔ Installed lubridate 1.9.3  (45ms)
+#16 67.75 ✔ Built tidyselect 1.2.1 (1.8s)
+#16 67.83 ✔ Installed tidyselect 1.2.1  (53ms)
+#16 69.04 ✔ Built plyr 1.8.8 (7.4s)
+#16 69.16 ✔ Installed plyr 1.8.8  (33ms)
+#16 69.19 ✔ Built pillar 1.9.0 (2.7s)
+#16 69.23 ✔ Installed pillar 1.9.0  (24ms)
+#16 69.24 ℹ Building tibble 3.2.1
+#16 69.41 ✔ Built httr2 1.0.1 (3.2s)
+#16 69.47 ✔ Installed httr2 1.0.1  (31ms)
+#16 69.48 ℹ Building gh 1.4.1
+#16 69.59 ✔ Built purrr 1.0.2 (3.5s)
+#16 69.63 ✔ Installed purrr 1.0.2  (18ms)
+#16 70.61 ✔ Built gh 1.4.1 (1.1s)
+#16 70.64 ✔ Installed gh 1.4.1  (14ms)
+#16 70.65 ℹ Building usethis 2.2.3
+#16 71.49 ✔ Built tibble 3.2.1 (2.1s)
+#16 71.54 ✔ Installed tibble 3.2.1  (27ms)
+#16 71.54 ℹ Building dplyr 1.1.4
+#16 73.64 ✔ Built usethis 2.2.3 (2.9s)
+#16 73.72 ✔ Installed usethis 2.2.3  (28ms)
+#16 78.07 ✔ Built dplyr 1.1.4 (6.4s)
+#16 78.15 ✔ Installed dplyr 1.1.4  (37ms)
+#16 89.90 ✔ Built stringi 1.7.12 (47.1s)
+#16 90.00 ✔ Installed stringi 1.7.12  (67ms)
+#16 90.01 ℹ Building stringr 1.5.0
+#16 91.48 ✔ Built stringr 1.5.0 (1.4s)
+#16 91.54 ✔ Installed stringr 1.5.0  (18ms)
+#16 91.55 ℹ Packaging UU 1.52.0
+#16 91.86 ✔ Packaged UU 1.52.0 (314ms)
+#16 91.87 ℹ Building UU 1.52.0
+#16 94.03 ✔ Built UU 1.52.0 (2.1s)
+#16 94.10 ✔ Installed UU 1.52.0 (github::yogat3ch/UU@1935fc3) (20ms)
+#16 94.11 ✔ 52 pkgs: added 52, dld 52 (NA B) [1m 27.9s]
+#16 94.14 > 
+#16 94.14 > 
+#16 DONE 94.4s
+
+#17 exporting to image
+#17 exporting layers
+#17 exporting layers 2.0s done
+#17 writing image sha256:64982598f257eba43adddc90ae1f4c45b5b30cadaaf80eccd91f5db196461045 done
+#17 naming to docker.io/library/test:arm64_latest done
+#17 DONE 2.0s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview

@@ -1,0 +1,22 @@
+Package: testRenvDocker
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Stephen", "Holsenbeck", , "stephen@virgalabs.io", role = c("aut", "cre"),
+           comment = "2ndary email: sholsen@alumni.emory.edu"),
+    person("Tommy", "Whitney", , "tommy@virgalabs.io", role = "aut"),
+    person("Lydia", "Bleifuss", , "lydia@virgalabs.io", role = "aut"),
+    person("Natalie", "Coston", , "natalie@virgalabs.io", role = "aut"),
+    person("Wylie", "Hampson", , "wylie@virgalabs.io", role = "aut"),
+    person("Maria", "Sevillano", , "maria@virgalabs.io", role = "aut"),
+    person("Vance", "McGrady", , "vance@virgalabs.io", role = "aut"),
+    person("Mila", "Pruett", , "mila@virgalabs.io", role = "aut")
+  )
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    UU

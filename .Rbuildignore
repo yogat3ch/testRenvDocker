@@ -1,0 +1,4 @@
+^renv$
+^renv\.lock$
+^testRenvDocker\.Rproj$
+^\.Rproj\.user$
